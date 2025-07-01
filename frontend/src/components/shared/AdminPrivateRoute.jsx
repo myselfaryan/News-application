@@ -1,12 +1,15 @@
-import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import React from "react"
+import { useSelector } from "react-redux"
+import { Navigate, Outlet } from "react-router-dom"
 
-// Example: Checks if user is admin, otherwise redirects
-const AdminPrivateRoute = ({ isAdmin }) => {
-  if (!isAdmin) {
-    return <Navigate to="/" replace />;
-  }
-  return <Outlet />;
-};
+const AdminPrivateRoute = () => {
+  const { currentUser } = useSelector((state) => state.user)
 
-export default AdminPrivateRoute;
+  return currentUser && currentUser.isAdmin ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/sign-in" />
+  )
+}
+
+export default AdminPrivateRoute
