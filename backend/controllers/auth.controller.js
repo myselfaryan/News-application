@@ -85,6 +85,7 @@ export const google = async (req, res, next) => {
         .status(200)
         .cookie("access_token", token, {
           httpOnly: true,
+          sameSite: "strict", // Added for better security
         })
         .json(rest)
     }
@@ -118,6 +119,7 @@ export const google = async (req, res, next) => {
       .status(200)
       .cookie("access_token", token, {
         httpOnly: true,
+        sameSite: "strict", // Added for better security
       })
       .json(rest)
   } catch (error) {
