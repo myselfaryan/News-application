@@ -3,6 +3,11 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
+// Example usage of the demo-util.js utility
+import { logGreeting } from "@/lib/demo-util"
+
+// Call the greeting logger when this module is loaded
+logGreeting()
 
 const AlertDialog = AlertDialogPrimitive.Root
 
@@ -81,6 +86,13 @@ const AlertDialogCancel = React.forwardRef(({ className, ...props }, ref) => (
     {...props} />
 ))
 AlertDialogCancel.displayName = AlertDialogPrimitive.Cancel.displayName
+
+// Utility function to log when AlertDialog is opened
+function logAlertDialogOpen() {
+  if (typeof window !== 'undefined') {
+    console.log('AlertDialog opened at', new Date().toLocaleString())
+  }
+}
 
 export {
   AlertDialog,
