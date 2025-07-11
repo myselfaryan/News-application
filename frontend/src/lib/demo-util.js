@@ -6,3 +6,12 @@ export function logGreeting() {
     console.log('Hello from demo-util.js!')
   }
 }
+
+// Improved: Add a utility to debounce functions for better performance in event handlers
+export function debounce(fn, delay) {
+  let timer = null;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
