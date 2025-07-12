@@ -30,19 +30,20 @@ const Comment = ({ comment, onLike, onEdit, onDelete }) => {
     const getUser = async () => {
       try {
         const res = await fetch(`/api/user/${comment.userId}`)
-
         const data = await res.json()
-
         if (res.ok) {
           setUser(data)
         }
       } catch (error) {
+        // Use toast for error feedback instead of just console.log
+        if (typeof window !== 'undefined' && window?.toast) {
+          window.toast({ title: "Failed to fetch user info." })
+        }
         console.log(error.message)
       }
     }
-
     getUser()
-  }, [comment])
+  }, [comment.userId])
 
   const handleEdit = () => {
     setIsEditing(true)
