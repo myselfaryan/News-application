@@ -17,6 +17,17 @@ export const signup = async (req, res, next) => {
     return next(errorHandler(400, "All fields are required"))
   }
 
+  // Additional: Email format validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email)) {
+    return next(errorHandler(400, "Invalid email format"))
+  }
+
+  // Additional: Password strength validation
+  if (password.length < 8) {
+    return next(errorHandler(400, "Password must be at least 8 characters"))
+  }
+
   const hashedPassword = bcryptjs.hashSync(password, 10)
 
   const newUser = new User({
